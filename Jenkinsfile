@@ -17,7 +17,7 @@ pipeline {
     always {
       script {
         // currentBuild.result = 'NOT_BUILT'
-        githubNotify description: 'This is a shorted example',  status: 'SUCCESS'
+        githubNotify description: 'Geral catito',  status: 'SUCCESS'
         echo 'Post always'
       }
     } // always
