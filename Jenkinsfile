@@ -16,7 +16,7 @@ pipeline {
     }
     always {
       script {
-        currentBuild.result = 'NOT_BUILT'
+        // currentBuild.result = 'NOT_BUILT'
         echo 'Post always'
       }
     } // always
