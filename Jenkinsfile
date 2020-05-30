@@ -4,7 +4,7 @@ pipeline {
   stages {
     stage('Hello') {
       steps {
-        echo 'Hello World JIMMYOnline 22222'
+        echo 'Hello World JIMMYOnline'
       }
     }
   }
@@ -16,7 +16,7 @@ pipeline {
     }
     always {
       script {
-        // currentBuild.result = 'NOT_BUILT'
+        currentBuild.result = 'NOT_BUILT'
         echo 'Post always'
       }
     } // always
