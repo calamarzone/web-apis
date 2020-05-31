@@ -10,7 +10,7 @@ pipeline {
           def node_package = readJSON file: 'package.json'
           env.APP_NAME = node_package.name
           env.APP_VERSION = node_package.version
-          env.APP_AUTHOR_NAME = node_package.author.name
+          env.APP_AUTHOR_NAME = node_package.author
           env.NODE_ENV = "development"
         }
       }
