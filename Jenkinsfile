@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-      def SLACK_CHANNEL = '#calamarzone-git'
+      def SLACK_CHANNEL = 'calamarzone-git'
     }
   stages {
     stage('prep') {
