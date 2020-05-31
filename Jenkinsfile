@@ -4,7 +4,7 @@ pipeline {
   stages {
     stage('Hello') {
       steps {
-        echo 'Hello World JIMMYOnline 2020'
+        echo 'Hello World JIMMYOnline'
       }
     }
   }
@@ -17,7 +17,7 @@ pipeline {
     always {
       script {
         // currentBuild.result = 'NOT_BUILT'
-        githubNotify description: 'Geral catito',  status: 'SUCCESS'
+        githubNotify description: 'Geral kitkat',  status: 'SUCCESS'
         echo 'Post always'
       }
     } // always
