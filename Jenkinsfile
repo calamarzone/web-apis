@@ -17,7 +17,7 @@ pipeline {
     always {
       script {
         // currentBuild.result = 'NOT_BUILT'
-        githubNotify description: 'Geral kitkat',  status: 'SUCCESS'
+        githubNotify description: 'Geral kitkat 2',  status: 'SUCCESS'
         echo 'Post always'
       }
     } // always
