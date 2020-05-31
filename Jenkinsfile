@@ -8,18 +8,4 @@ pipeline {
       }
     }
   }
-  post {
-    failure {
-      script {
-        echo 'Post Failure'
-      } // failure
-    }
-    always {
-      script {
-        // currentBuild.result = 'NOT_BUILT'
-        githubNotify description: 'Geral kitkato',  status: 'SUCCESS'
-        echo 'Post always'
-      }
-    } // always
-  } // post
 }
