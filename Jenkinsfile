@@ -10,7 +10,6 @@ pipeline {
           def node_package = readJSON file: 'package.json'
           env.APP_NAME = node_package.name
           env.APP_VERSION = node_package.version
-          env.APP_AUTHOR_NAME = node_package.author.name
           env.NODE_ENV = "development"
         }
       }
@@ -24,22 +23,21 @@ pipeline {
   post {
     failure {
       script {
-        def message = "<${env.BUILD_URL}|Build #${env.BUILD_NUMBER}> - FAILED to build App: ${env.APP_NAME} | Env: ${env.NODE_ENV} | Version: ${env.APP_VERSION}]"
+        def message = "<${env.BUILD_URL}|Build #${env.BUILD_NUMBER}> - FAILED to build. [App: ${env.APP_NAME} | Env: ${env.NODE_ENV} | Version: ${env.APP_VERSION}]"
         slackSend channel: "#${env.SLACK_CHANNEL}", color: 'danger', message: message
         currentBuild.result = 'NOT_BUILT'
-        echo 'Post Failure'
+        githubNotify description: 'Build FAILED',  status: 'FAILURE'
       } // failure
     }
     success {
       script {
-        def message = "<${env.BUILD_URL}|Build #${env.BUILD_NUMBER}> - SUCCEED to build App: ${env.APP_NAME} | Env: ${env.NODE_ENV} | Version: ${env.APP_VERSION}]"
+        def message = "<${env.BUILD_URL}|Build #${env.BUILD_NUMBER}> - SUCCEED to build. [App: ${env.APP_NAME} | Env: ${env.NODE_ENV} | Version: ${env.APP_VERSION}]"
         slackSend channel: "#${env.SLACK_CHANNEL}", color: 'good', message: message
-        echo 'Post Succeed'
+        githubNotify description: 'Build SUCCEED',  status: 'SUCCESS'
       } // success
     }
     always {
       script {
-        // githubNotify description: 'Geral kitkato',  status: 'SUCCESS'
         echo 'Post always'
       }
     } // always
