@@ -16,14 +16,14 @@ pipeline {
     }
     stage('Hello') {
       steps {
-        echo 'Hello World JIMMYOnline'
+        sh 'printenv'
       }
     }
   }
   post {
     failure {
       script {
-        def message = "<${env.BUILD_URL}|Build #${env.BUILD_NUMBER}> - FAILED to build. [App: ${env.APP_NAME} | Env: ${env.NODE_ENV} | Version: ${env.APP_VERSION}]"
+        def message = "${env.CHANGE_AUTHOR} <${env.BUILD_URL}|Build #${env.BUILD_NUMBER}> - FAILED to build \n[App: ${env.APP_NAME} | Branch: ${env.CHANGE_BRANCH} | Env: ${env.NODE_ENV} | Version: ${env.APP_VERSION}]"
         slackSend channel: "#${env.SLACK_CHANNEL}", color: 'danger', message: message
         currentBuild.result = 'NOT_BUILT'
         githubNotify description: 'Build FAILED',  status: 'FAILURE'
@@ -31,7 +31,7 @@ pipeline {
     }
     success {
       script {
-        def message = "<${env.BUILD_URL}|Build #${env.BUILD_NUMBER}> - SUCCEED to build. [App: ${env.APP_NAME} | Env: ${env.NODE_ENV} | Version: ${env.APP_VERSION}]"
+        def message = "${env.CHANGE_AUTHOR} <${env.BUILD_URL}|Build #${env.BUILD_NUMBER}> - SUCCEED to build \n[App: ${env.APP_NAME} | Branch: ${env.CHANGE_BRANCH} | Env: ${env.NODE_ENV} | Version: ${env.APP_VERSION}]"
         slackSend channel: "#${env.SLACK_CHANNEL}", color: 'good', message: message
         githubNotify description: 'Build SUCCEED',  status: 'SUCCESS'
       } // success
