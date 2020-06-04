@@ -2,6 +2,7 @@
 
 1. [ Objective ](#objective-watermelon)
 2. [ Technologies ](#technologies-peach)
+2. [ Scaffolding ](#scaffolding-banana)
 2. [ Web APIs list ](#web-apis-list-green_apple)
 
 ## Objective :watermelon:
@@ -16,6 +17,26 @@ This main purpose of this repository is to have a catalogue of Web APIs examples
 
 - **_HTML5_**
 
+## Scaffolding :banana:
+
+```
+  /src
+    /<web-api name>
+      /components
+      index.html
+      README.md
+```
+
+example of the Console API:
+
+```
+  /src
+    /console
+      /components
+      index.html
+      README.md
+```
+
 ## Web APIs list :green_apple:
 
 This is the list of all the Web APIs to cover in this projec:
@@ -23,6 +44,3 @@ This is the list of all the Web APIs to cover in this projec:
 [Website](https://developer.mozilla.org/en-US/docs/Web/API)
 
 _Table in construction..._
-
-
-
