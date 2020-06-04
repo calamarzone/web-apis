@@ -16,11 +16,9 @@ pipeline {
     }
     stage('Hello') {
       steps {
-        script {
-          echo 'Hello World JIMMYOnline'
-          echo 'Branch name'
-          echo env
-        }
+        echo "Env: ${env}"
+        echo "Env branch is ${env.BRANCH_NAME}"
+        sh 'printenv'
       }
     }
   }
