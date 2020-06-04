@@ -31,7 +31,7 @@ pipeline {
     }
     success {
       script {
-          def message = "${env.CHANGE_AUTHOR} <${env.BUILD_URL}|Build #${env.BUILD_NUMBER}> - SUCCEED to build. [App: ${env.APP_NAME} | Branch: ${env.CHANGE_BRANCH} | Env: ${env.NODE_ENV} | Version: ${env.APP_VERSION}]"
+        def message = "${env.CHANGE_AUTHOR} <${env.BUILD_URL}|Build #${env.BUILD_NUMBER}> - SUCCEED to build. [App: ${env.APP_NAME} | Branch: ${env.CHANGE_BRANCH} | Env: ${env.NODE_ENV} | Version: ${env.APP_VERSION}]"
         slackSend channel: "#${env.SLACK_CHANNEL}", color: 'good', message: message
         githubNotify description: 'Build SUCCEED',  status: 'SUCCESS'
       } // success
