@@ -1,10 +1,13 @@
 pipeline {
     agent any
+    tools {
+        nodejs "node"
+    }
     environment {
       def SLACK_CHANNEL = 'calamarzone-jenkins'
     }
   stages {
-    stage('prep') {
+    stage('Prep') {
       steps {
         script {
           def node_package = readJSON file: 'package.json'
@@ -14,16 +17,21 @@ pipeline {
         }
       }
     }
-    stage('Hello') {
+    stage('Install') {
       steps {
-        sh 'printenv'
+        sh 'npm install'
+      }
+    }
+    stage('Test') {
+      steps {
+        sh 'npm run lint'
       }
     }
   }
   post {
     failure {
       script {
-        def message = "${env.CHANGE_AUTHOR || env.BRANCH_NAME} <${env.BUILD_URL}|Build #${env.BUILD_NUMBER}> - FAILED to build \n[App: ${env.APP_NAME} | Branch: ${env.BRANCH_NAME} | Env: ${env.NODE_ENV} | Version: ${env.APP_VERSION}]"
+        def message = "${env.CHANGE_AUTHOR ? env.CHANGE_AUTHOR : env.BRANCH_NAME} <${env.BUILD_URL}|Build #${env.BUILD_NUMBER}> - FAILED to build \n[App: ${env.APP_NAME} | Branch: ${env.BRANCH_NAME} | Env: ${env.NODE_ENV} | Version: ${env.APP_VERSION}]"
         slackSend channel: "#${env.SLACK_CHANNEL}", color: 'danger', message: message
         currentBuild.result = 'NOT_BUILT'
         githubNotify description: 'Build FAILED',  status: 'FAILURE'
@@ -31,7 +39,7 @@ pipeline {
     }
     success {
       script {
-        def message = "${env.CHANGE_AUTHOR || env.BRANCH_NAME} <${env.BUILD_URL}|Build #${env.BUILD_NUMBER}> - SUCCEED to build \n[App: ${env.APP_NAME} | Branch: ${env.BRANCH_NAME} | Env: ${env.NODE_ENV} | Version: ${env.APP_VERSION}]"
+        def message = "${env.CHANGE_AUTHOR ? env.CHANGE_AUTHOR : env.BRANCH_NAME} <${env.BUILD_URL}|Build #${env.BUILD_NUMBER}> - SUCCEED to build \n[App: ${env.APP_NAME} | Branch: ${env.BRANCH_NAME} | Env: ${env.NODE_ENV} | Version: ${env.APP_VERSION}]"
         slackSend channel: "#${env.SLACK_CHANNEL}", color: 'good', message: message
         githubNotify description: 'Build SUCCEED',  status: 'SUCCESS'
       } // success
