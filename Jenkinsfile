@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    tools {
+        nodejs "node"
+    }
     environment {
       def SLACK_CHANNEL = 'calamarzone-jenkins'
     }
@@ -14,9 +17,14 @@ pipeline {
         }
       }
     }
-    stage('Hello') {
+    stage('Install') {
       steps {
-        sh 'printenv'
+        sh 'npm install'
+      }
+    }
+    stage('Test') {
+      steps {
+        sh 'npm run lint'
       }
     }
   }
