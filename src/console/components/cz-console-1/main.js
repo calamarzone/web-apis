@@ -1,8 +1,5 @@
 customElements.define('cz-console-1',
   class extends HTMLElement {
-    /**
-     * Constructor
-     */
     constructor() {
       super();
       console.log('Hi, Im the console API component 1');
