@@ -17,6 +17,9 @@ pipeline {
     stage('Hello') {
       steps {
         echo 'Hello World JIMMYOnline'
+        echo 'Branch name'
+        echo env
+        echo env.BRANCH_NAME
       }
     }
   }
