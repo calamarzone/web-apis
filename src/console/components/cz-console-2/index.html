@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Console API — web components</title>
+    <script src="main.js" defer></script>
+  </head>
+  <body>
+    <h1>Console API - web components</h1>  
+    <template id="console-component">
+        <style>
+          p {
+            color: white;
+            background-color: #666;
+            padding: 5px;
+          }
+        </style>
+        <p><slot name="Test">My default text</slot></p>
+      </template>  
+    <console-component>
+        <span slot="Component">This is a test text</span>
+    </console-component>
+
+  </body>
+</html>
