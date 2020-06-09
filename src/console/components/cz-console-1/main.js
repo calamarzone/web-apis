@@ -1,26 +1,68 @@
-customElements.define('cz-console-1',
-  class extends HTMLElement {
-    /**
-     * Constructor
-     */
-    constructor() {
-      super();
-      console.log('Hi, Im the console API component 1');
+/**
+ * CalamarzoneConsole class
+ */
+class CalamarzoneConsole extends HTMLElement {
+  /**
+   * Constructor
+   */
+  constructor() {
+    super();
 
-      const template = document.getElementById('console-template');
-      const templateContent = template.content;
+    const shadow = this.attachShadow({mode: 'open'});
 
-      const shadowRoot = this.attachShadow({mode: 'open'});
-
-      const style = document.createElement('style');
-      style.textContent = `
-        h2 { margin: 0 0 10px; }
-        ul { margin: 0; }
-        p { margin: 10px 0; }
-      `;
-
-      shadowRoot.appendChild(style);
-      shadowRoot.appendChild(templateContent.cloneNode(true));
-    }
+    this.createAssert(shadow);
+    this.createClear(shadow);
+    this.createCount(shadow);
   }
-);
+
+  /**
+   * Create Assert example
+   * @param {ShadowRoot} shadow
+   */
+  createAssert(shadow) {
+    const button = document.createElement('button');
+    button.textContent = 'assert';
+
+    button.onclick = () => {
+      const random = Math.random() * 10;
+      const limit = 5;
+      console.assert(random > limit, {
+        errorMsg: `Number ${random} is not greater than ${limit}`
+      });
+    };
+
+    shadow.appendChild(button);
+  }
+
+  /**
+   * Create Clear example
+   * @param {ShadowRoot} shadow
+   */
+  createClear(shadow) {
+    const button = document.createElement('button');
+    button.textContent = 'clear';
+
+    button.onclick = () => {
+      console.clear();
+    };
+
+    shadow.appendChild(button);
+  }
+
+  /**
+   * Create Count example
+   * @param {ShadowRoot} shadow
+   */
+  createCount(shadow) {
+    const button = document.createElement('button');
+    button.textContent = 'count';
+
+    button.onclick = () => {
+      console.count();
+    };
+
+    shadow.appendChild(button);
+  }
+}
+
+customElements.define('cz-console', CalamarzoneConsole);
