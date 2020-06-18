@@ -14,7 +14,7 @@ class ConsoleComponent extends HTMLElement {
     this.getAsert(shadow);
     this.getClear(shadow);
     this.getCount(shadow);
-    this.getcountReset(shadow);
+    this.getCountreset(shadow);
     this.getDebug(shadow);
     this.getDir(shadow);
     this.getDirXML(shadow);
@@ -24,17 +24,15 @@ class ConsoleComponent extends HTMLElement {
     this.getInfo(shadow);
     this.getLog(shadow);
     this.getProfile(shadow);
-    this.getProfileEnd(shadow);
     this.getTable(shadow);
     this.getTime(shadow);
-    this.getTimeEnd(shadow);
     this.getTimeLog(shadow);
     this.getTimeStamp(shadow);
     this.getTrace(shadow);
     this.getWarn(shadow);
   }
   /**
-   *
+   *getAsert
    * @param {shadowroot} shadow
    */
   getAsert(shadow) {
@@ -50,7 +48,7 @@ class ConsoleComponent extends HTMLElement {
   }
 
   /**
-   *
+   *getClear
    * @param {shadowroot} shadow
    */
   getClear(shadow) {
@@ -63,7 +61,7 @@ class ConsoleComponent extends HTMLElement {
   }
 
   /**
-   *
+   *getCount
    * @param {shadowroot} shadow
    */
   getCount(shadow) {
@@ -76,10 +74,10 @@ class ConsoleComponent extends HTMLElement {
   }
 
   /**
-   *
+   *getCountreset
    * @param {shadowroot} shadow
    */
-  getcountReset(shadow) {
+  getCountreset(shadow) {
     const button = document.createElement('button');
     button.textContent = 'countReset';
     button.onclick = () => {
@@ -89,7 +87,7 @@ class ConsoleComponent extends HTMLElement {
   }
 
   /**
-   *
+   *getDebug
    * @param {shadowroot} shadow
    */
   getDebug(shadow) {
@@ -101,31 +99,45 @@ class ConsoleComponent extends HTMLElement {
     shadow.appendChild(button);
   }
   /**
-   *
+   *getDir
    * @param {shadowroot} shadow
    */
   getDir(shadow) {
     const button = document.createElement('button');
     button.textContent = 'Dir';
     button.onclick = () => {
-      console.dir(document.location);
+      console.dir(button);
+      console.log(typeof button);
+      console.log(button);
     };
     shadow.appendChild(button);
   }
   /**
-   *
+   *getDirXML
    * @param {shadowroot} shadow
    */
   getDirXML(shadow) {
     const button = document.createElement('button');
     button.textContent = 'DirXML';
     button.onclick = () => {
-      console.dirxml(document.location);
+      const fancyThings = {
+        car: '🏎️ Ferrari',
+        watch: '⌚ Cartier',
+        clothing: {
+          shoes: '👠 Christian Louboutin',
+          dress: '👗 Versace',
+        },
+        boat: '🛥️ Sunseeker',
+      };
+      console.dirxml(fancyThings);
+      console.dirxml(button);
+      console.log(typeof button);
+      console.log(button);
     };
     shadow.appendChild(button);
   }
   /**
-   *
+   *getError
    * @param {shadowroot} shadow
    */
   getError(shadow) {
@@ -137,7 +149,7 @@ class ConsoleComponent extends HTMLElement {
     shadow.appendChild(button);
   }
   /**
-   *
+   *getGroup
    * @param {shadowroot} shadow
    */
   getGroup(shadow) {
@@ -156,7 +168,7 @@ class ConsoleComponent extends HTMLElement {
     shadow.appendChild(button);
   }
   /**
-   *
+   *getGroupCollapsed
    * @param {shadowroot} shadow
    */
   getGroupCollapsed(shadow) {
@@ -177,7 +189,7 @@ class ConsoleComponent extends HTMLElement {
     shadow.appendChild(button);
   }
   /**
-   *
+   *getInfo
    * @param {shadowroot} shadow
    */
   getInfo(shadow) {
@@ -189,7 +201,7 @@ class ConsoleComponent extends HTMLElement {
     shadow.appendChild(button);
   }
   /**
-   *
+   *getLog
    * @param {shadowroot} shadow
    */
   getLog(shadow) {
@@ -201,38 +213,38 @@ class ConsoleComponent extends HTMLElement {
     shadow.appendChild(button);
   }
   /**
-   *
+   *getProfile
    * @param {shadowroot} shadow
    */
   getProfile(shadow) {
     const button = document.createElement('button');
     button.textContent = 'Profile';
     button.onclick = () => {
-      console.profile();
+      console.profile('myProfile');
+      let time = 1;
+      const interval = setInterval(function() {
+        if (time <= 3) {
+          alert(time);
+          time++;
+        } else {
+          clearInterval(interval);
+          console.profileEnd();
+          alert('Go to the JavaScript Profiler to see the results');
+        }
+      }, 4000);
     };
     shadow.appendChild(button);
   }
+
   /**
-   *
-   * @param {shadowroot} shadow
-   */
-  getProfileEnd(shadow) {
-    const button = document.createElement('button');
-    button.textContent = 'ProfileEnd';
-    button.onclick = () => {
-      console.profileEnd();
-    };
-    shadow.appendChild(button);
-  }
-  /**
-   *
+   *getTable
    * @param {shadowroot} shadow
    */
   getTable(shadow) {
     const button = document.createElement('button');
     button.textContent = 'Table';
     /**
-     *
+     *Person
      * @param {*} firstName
      * @param {*} lastName
      */
@@ -249,7 +261,7 @@ class ConsoleComponent extends HTMLElement {
     shadow.appendChild(button);
   }
   /**
-   *
+   *getTime
    * @param {shadowroot} shadow
    */
   getTime(shadow) {
@@ -257,23 +269,22 @@ class ConsoleComponent extends HTMLElement {
     button.textContent = 'Time';
     button.onclick = () => {
       console.time('mytime');
+      let time = 1;
+      const interval = setInterval(function() {
+        if (time <= 5) {
+          console.log(time);
+          time++;
+        } else {
+          clearInterval(interval);
+          console.timeEnd('mytime');
+          console.log('Time is 5');
+        }
+      }, 4000);
     };
     shadow.appendChild(button);
   }
   /**
-   *
-   * @param {shadowroot} shadow
-   */
-  getTimeEnd(shadow) {
-    const button = document.createElement('button');
-    button.textContent = 'TimeEnd';
-    button.onclick = () => {
-      console.timeEnd('mytime');
-    };
-    shadow.appendChild(button);
-  }
-  /**
-   *
+   *getTimeLog
    * @param {shadowroot} shadow
    */
   getTimeLog(shadow) {
@@ -285,19 +296,19 @@ class ConsoleComponent extends HTMLElement {
     shadow.appendChild(button);
   }
   /**
-   *
+   *getTimeStamp
    * @param {shadowroot} shadow
    */
   getTimeStamp(shadow) {
     const button = document.createElement('button');
     button.textContent = 'TimeStamp';
     button.onclick = () => {
-      console.timeStamp();
+      console.timeStamp('Jimmy');
     };
     shadow.appendChild(button);
   }
   /**
-   *
+   *getTrace
    * @param {shadowroot} shadow
    */
   getTrace(shadow) {
@@ -305,11 +316,11 @@ class ConsoleComponent extends HTMLElement {
     button.textContent = 'Trace';
     button.onclick = () => {
       /**
-       *
+       *function1
        */
       function function1() {
         /**
-         *
+         *function2
          */
         function function2() {
           console.trace();
@@ -321,7 +332,7 @@ class ConsoleComponent extends HTMLElement {
     shadow.appendChild(button);
   }
   /**
-   *
+   *getWarn
    * @param {shadowroot} shadow
    */
   getWarn(shadow) {
