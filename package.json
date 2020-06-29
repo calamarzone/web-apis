@@ -4,8 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "npx eslint --ignore-path .gitignore ."
+    "build": "gulp build",
+    "build:fresh": "gulp build:fresh",
+    "build:prod": "env NODE_ENV=prod gulp build",
+    "dev": "gulp dev",
+    "dev:no-lint": "gulp dev:no-lint",
+    "lint-js": "gulp lint-js",
+    "serve": "gulp serve-only"
   },
   "repository": {
     "type": "git",
@@ -18,7 +23,16 @@
   },
   "homepage": "https://github.com/calamarzone/web-apis#readme",
   "devDependencies": {
+    "browser-sync": "^2.26.7",
+    "copy-webpack-plugin": "^6.0.2",
+    "del": "^5.1.0",
     "eslint": "^7.1.0",
-    "eslint-config-google": "^0.14.0"
+    "eslint-config-google": "^0.14.0",
+    "gulp": "^4.0.2",
+    "gulp-cache": "^1.1.3",
+    "gulp-eslint": "^6.0.0",
+    "raw-loader": "^4.0.1",
+    "webpack": "^4.43.0",
+    "webpack-merge": "^4.2.2"
   }
 }

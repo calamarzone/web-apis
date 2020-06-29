@@ -1,3 +1,5 @@
+import css from './style.css';
+
 /**
  * CalamarzoneConsole class
  */
@@ -7,12 +9,14 @@ class CalamarzoneConsole extends HTMLElement {
    */
   constructor() {
     super();
-
-    const shadow = this.attachShadow({mode: 'open'});
-
-    this.createAssert(shadow);
-    this.createClear(shadow);
-    this.createCount(shadow);
+    const shadowRoot = this.attachShadow({mode: 'open'});
+    const style = document.createElement('style');
+    style.innerText = css;
+    shadowRoot.appendChild(style);
+    // console.log(style);
+    this.createAssert(shadowRoot);
+    // this.createClear(shadow);
+    // this.createCount(shadow);
   }
 
   /**
@@ -22,7 +26,7 @@ class CalamarzoneConsole extends HTMLElement {
   createAssert(shadow) {
     const button = document.createElement('button');
     button.textContent = 'assert';
-
+    button.setAttribute('class', 'my-class');
     button.onclick = () => {
       const random = Math.random() * 10;
       const limit = 5;

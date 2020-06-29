@@ -21,20 +21,19 @@ This main purpose of this repository is to have a catalogue of Web APIs examples
 
 ```
   /src
-    /<web-api name>
-      /components
-      index.html
-      README.md
+    /<web-api component name>
+    files..
 ```
 
 example of the Console API:
 
 ```
   /src
-    /console
-      /components
-      index.html
-      README.md
+    /cz-console
+    index.html
+    index.js
+    style.css
+  index.html
 ```
 
 ## Web APIs list :green_apple:
