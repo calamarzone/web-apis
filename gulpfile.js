@@ -43,7 +43,7 @@ function watchFiles() {
     ], {
       ignoreInitial: true
     },
-    series('build', reload)
+    series('lint-js', 'build', reload)
   )
 }
 
