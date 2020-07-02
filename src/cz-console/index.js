@@ -9,8 +9,8 @@ class CalamarzoneConsole extends HTMLElement {
    */
   constructor() {
     super();
-    const shadowRoot = this.attachShadow({mode: 'open'});
-    const style = document.createElement('style');
+    const shadowRoot = this.attachShadow({mode: 'open'}),
+          style = document.createElement('style');
     style.innerText = css;
     shadowRoot.appendChild(style);
     // console.log(style);
@@ -28,8 +28,8 @@ class CalamarzoneConsole extends HTMLElement {
     button.textContent = 'assert';
     button.setAttribute('class', 'my-class');
     button.onclick = () => {
-      const random = Math.random() * 10;
-      const limit = 5;
+      const random = Math.random() * 10,
+            limit = 5;
       console.assert(random > limit, {
         errorMsg: `Number ${random} is not greater than ${limit}`
       });
