@@ -17,6 +17,15 @@
       2, 2, {
         "VariableDeclarator": "first"
       }
+    ],
+    "require-jsdoc": [
+      2, {
+        "require": {
+          "FunctionDeclaration": false,
+          "MethodDefinition": true,
+          "ClassDeclaration": false
+        }
+      }
     ]
   }
 }
