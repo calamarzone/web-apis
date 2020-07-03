@@ -1,0 +1,29 @@
+.url-form {
+  width: calc(100% - 30px);
+  margin: 0 auto;
+}
+
+.url-form__field {
+  display: flex;
+  flex-direction: column;
+  margin: 12px 0;
+}
+
+.url-form__field__label {
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.url-form__field__label,
+.url-form__field__textarea,
+.url-form__field__input {
+  flex: 1;
+}
+
+.url-form__field__textarea {
+  resize: none;
+}
+
+.url-form__reset {
+  float: right;
+}
