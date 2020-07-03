@@ -1,5 +1,5 @@
 {
-  "extends": ["eslint:recommended"],
+  "extends": ["eslint:recommended", "google"],
   "env": {
     "browser": true,
     "node": true,
@@ -10,7 +10,22 @@
   },
   "rules": {
     "eol-last": 0,
-    "indent": [2, 2],
-    "comma-dangle": ["error", "never"]
+    "comma-dangle": ["error", "never"],
+    "no-debugger": 1,
+    "one-var": ["error", "consecutive"],
+    "indent": [
+      2, 2, {
+        "VariableDeclarator": "first"
+      }
+    ],
+    "require-jsdoc": [
+      2, {
+        "require": {
+          "FunctionDeclaration": false,
+          "MethodDefinition": true,
+          "ClassDeclaration": false
+        }
+      }
+    ]
   }
 }

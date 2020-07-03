@@ -1,13 +1,14 @@
+/* eslint-disable require-jsdoc */
 'use strict';
 
 const {task, src, watch, series} = require('gulp'),
-  del = require('del'),
-  cache = require('gulp-cache'),
-  webpack = require('webpack'),
-  webpackDev = require('./webpack.dev.js'),
-  webpackProd = require('./webpack.prod.js'),
-  browserSync = require('browser-sync').create(),
-  eslint = require('gulp-eslint');
+      del = require('del'),
+      cache = require('gulp-cache'),
+      webpack = require('webpack'),
+      webpackDev = require('./webpack.dev.js'),
+      webpackProd = require('./webpack.prod.js'),
+      browserSync = require('browser-sync').create(),
+      eslint = require('gulp-eslint');
 
 
 function lintJs() {
@@ -21,16 +22,17 @@ function lintJs() {
 
 function build() {
   return new Promise((resolve, reject) => {
-    const webpackConfig = process.env.NODE_ENV === 'prod' ? webpackProd : webpackDev;
+    const webpackConfig =
+      process.env.NODE_ENV === 'prod' ? webpackProd : webpackDev;
     webpack(webpackConfig, (err, stats) => {
       if (err) {
-        return reject(err)
+        return reject(err);
       }
       if (stats.hasErrors()) {
-        return reject(new Error(stats.compilation.errors.join('\n')))
+        return reject(new Error(stats.compilation.errors.join('\n')));
       }
-      resolve()
-    })
+      resolve();
+    });
   });
 }
 
@@ -44,7 +46,7 @@ function watchFiles() {
       ignoreInitial: true
     },
     series('lint-js', 'build', reload)
-  )
+  );
 }
 
 function serve(done) {
