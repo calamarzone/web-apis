@@ -9,6 +9,7 @@
     "sourceType": "module"
   },
   "rules": {
+    "no-unused-vars": [2, {"args": "all"}],
     "eol-last": 0,
     "comma-dangle": ["error", "never"],
     "no-debugger": 1,
