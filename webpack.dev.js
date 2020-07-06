@@ -9,7 +9,7 @@ module.exports = merge(common, {
     new CopyPlugin({
       patterns: [
         {
-          from: '**/demo.html',
+          from: '**/*.html',
           context: './src/',
           to: '[path]/index.html'
         }
