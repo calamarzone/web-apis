@@ -1,99 +1,85 @@
-import css from './style.css';
-
 /**
- * CalamarzoneConsole class
+ * ConsoleComponent
  */
-class CalamarzoneConsole extends HTMLElement {
+class ConsoleComponent extends HTMLElement {
   /**
    * Constructor
    */
   constructor() {
+    // Always call super first in constructor
     super();
-    const shadowRoot = this.attachShadow({mode: 'open'}),
-          style = document.createElement('style');
-    style.innerText = css;
-    shadowRoot.appendChild(style);
-    // console.log(style);
-    this.createAssert(shadowRoot);
-    this.createClear(shadowRoot);
-    this.createCount(shadowRoot);
-    this.createCountreset(shadowRoot);
-    this.createDebug(shadowRoot);
-    this.createDir(shadowRoot);
-    this.createDirXML(shadowRoot);
-    this.createError(shadowRoot);
-    this.createGroup(shadowRoot);
-    this.createGroupCollapsed(shadowRoot);
-    this.createInfo(shadowRoot);
-    this.createLog(shadowRoot);
-    this.createProfile(shadowRoot);
-    this.createTable(shadowRoot);
-    this.createTime(shadowRoot);
-    this.createTimeLog(shadowRoot);
-    this.createTimeStamp(shadowRoot);
-    this.createTrace(shadowRoot);
-    this.createWarn(shadowRoot);
-    // this.createClear(shadow);
-    // this.createCount(shadow);
+
+    const shadow = this.attachShadow({mode: 'open'});
+
+    this.getAsert(shadow);
+    this.getClear(shadow);
+    this.getCount(shadow);
+    this.getCountreset(shadow);
+    this.getDebug(shadow);
+    this.getDir(shadow);
+    this.getDirXML(shadow);
+    this.getError(shadow);
+    this.getGroup(shadow);
+    this.getGroupCollapsed(shadow);
+    this.getInfo(shadow);
+    this.getLog(shadow);
+    this.getProfile(shadow);
+    this.getTable(shadow);
+    this.getTime(shadow);
+    this.getTimeLog(shadow);
+    this.getTimeStamp(shadow);
+    this.getTrace(shadow);
+    this.getWarn(shadow);
   }
-
   /**
-   * Create Assert example
-   * @param {ShadowRoot} shadow
+   *getAsert
+   * @param {shadowroot} shadow
    */
-  createAssert(shadow) {
+  getAsert(shadow) {
     const button = document.createElement('button');
-    button.textContent = 'assert';
-    button.setAttribute('class', 'my-class');
+    button.textContent = 'Assert';
     button.onclick = () => {
-      const random = Math.random() * 10,
-            limit = 5;
-      console.assert(random > limit, {
-        errorMsg: `Number ${random} is not greater than ${limit}`
-      });
+      const number = Math.floor(Math.random() * 10);
+      console.assert(number % 2 === 0,
+        {errorMsg: `Number ${number} is not even`});
+      console.log(`Number ${number}`);
     };
-
     shadow.appendChild(button);
   }
 
   /**
-   * Create Clear example
-   * @param {ShadowRoot} shadow
+   *getClear
+   * @param {shadowroot} shadow
    */
-  createClear(shadow) {
+  getClear(shadow) {
     const button = document.createElement('button');
-    button.textContent = 'clear';
-    button.setAttribute('class', 'my-class');
+    button.textContent = 'Clear';
     button.onclick = () => {
       console.clear();
     };
-
     shadow.appendChild(button);
   }
 
   /**
-   * Create Count example
-   * @param {ShadowRoot} shadow
+   *getCount
+   * @param {shadowroot} shadow
    */
-  createCount(shadow) {
+  getCount(shadow) {
     const button = document.createElement('button');
-    button.textContent = 'count';
-    button.setAttribute('class', 'my-class');
+    button.textContent = 'Count';
     button.onclick = () => {
       console.count();
     };
-
     shadow.appendChild(button);
   }
 
   /**
-   *  Create Countreset example
+   *getCountreset
    * @param {shadowroot} shadow
    */
-  createCountreset(shadow) {
+  getCountreset(shadow) {
     const button = document.createElement('button');
     button.textContent = 'countReset';
-    button.setAttribute('class', 'my-class');
     button.onclick = () => {
       console.countReset();
     };
@@ -101,26 +87,24 @@ class CalamarzoneConsole extends HTMLElement {
   }
 
   /**
-   * Create Debug example
+   *getDebug
    * @param {shadowroot} shadow
    */
-  createDebug(shadow) {
+  getDebug(shadow) {
     const button = document.createElement('button');
     button.textContent = 'Debug';
-    button.setAttribute('class', 'my-class');
     button.onclick = () => {
       console.debug('Debugging');
     };
     shadow.appendChild(button);
   }
   /**
-   * Create Dir example
+   *getDir
    * @param {shadowroot} shadow
    */
-  createDir(shadow) {
+  getDir(shadow) {
     const button = document.createElement('button');
     button.textContent = 'Dir';
-    button.setAttribute('class', 'my-class');
     button.onclick = () => {
       console.dir(button);
       console.log(typeof button);
@@ -129,22 +113,21 @@ class CalamarzoneConsole extends HTMLElement {
     shadow.appendChild(button);
   }
   /**
-   * create DirXML example
+   *getDirXML
    * @param {shadowroot} shadow
    */
-  createDirXML(shadow) {
+  getDirXML(shadow) {
     const button = document.createElement('button');
     button.textContent = 'DirXML';
-    button.setAttribute('class', 'my-class');
     button.onclick = () => {
       const fancyThings = {
         car: '🏎️ Ferrari',
         watch: '⌚ Cartier',
         clothing: {
           shoes: '👠 Christian Louboutin',
-          dress: '👗 Versace'
+          dress: '👗 Versace',
         },
-        boat: '🛥️ Sunseeker'
+        boat: '🛥️ Sunseeker',
       };
       console.dirxml(fancyThings);
       console.dirxml(button);
@@ -154,26 +137,24 @@ class CalamarzoneConsole extends HTMLElement {
     shadow.appendChild(button);
   }
   /**
-   *  Create Error example
+   *getError
    * @param {shadowroot} shadow
    */
-  createError(shadow) {
+  getError(shadow) {
     const button = document.createElement('button');
     button.textContent = 'Error';
-    button.setAttribute('class', 'my-class');
     button.onclick = () => {
       console.error('This is an error message!');
     };
     shadow.appendChild(button);
   }
   /**
-   * create Group example
+   *getGroup
    * @param {shadowroot} shadow
    */
-  createGroup(shadow) {
+  getGroup(shadow) {
     const button = document.createElement('button');
     button.textContent = 'Group';
-    button.setAttribute('class', 'my-class');
     button.onclick = () => {
       console.group('Level 2');
       console.log('Level 2');
@@ -187,13 +168,12 @@ class CalamarzoneConsole extends HTMLElement {
     shadow.appendChild(button);
   }
   /**
-   *create GroupCollapsed example
+   *getGroupCollapsed
    * @param {shadowroot} shadow
    */
-  createGroupCollapsed(shadow) {
+  getGroupCollapsed(shadow) {
     const button = document.createElement('button');
     button.textContent = 'GroupCollapsed';
-    button.setAttribute('class', 'my-class');
     button.onclick = () => {
       console.groupCollapsed('Level 2');
       console.log('Level 2');
@@ -209,39 +189,36 @@ class CalamarzoneConsole extends HTMLElement {
     shadow.appendChild(button);
   }
   /**
-   *  create Info example
+   *getInfo
    * @param {shadowroot} shadow
    */
-  createInfo(shadow) {
+  getInfo(shadow) {
     const button = document.createElement('button');
     button.textContent = 'Info';
-    button.setAttribute('class', 'my-class');
     button.onclick = () => {
       console.info('This is an info message');
     };
     shadow.appendChild(button);
   }
   /**
-   *  create Log example
+   *getLog
    * @param {shadowroot} shadow
    */
-  createLog(shadow) {
+  getLog(shadow) {
     const button = document.createElement('button');
     button.textContent = 'Log';
-    button.setAttribute('class', 'my-class');
     button.onclick = () => {
       console.log(document.body);
     };
     shadow.appendChild(button);
   }
   /**
-   *  create Profile example
+   *getProfile
    * @param {shadowroot} shadow
    */
-  createProfile(shadow) {
+  getProfile(shadow) {
     const button = document.createElement('button');
     button.textContent = 'Profile';
-    button.setAttribute('class', 'my-class');
     button.onclick = () => {
       console.profile('myProfile');
       let time = 1;
@@ -260,13 +237,12 @@ class CalamarzoneConsole extends HTMLElement {
   }
 
   /**
-   *  create Table example
+   *getTable
    * @param {shadowroot} shadow
    */
-  createTable(shadow) {
+  getTable(shadow) {
     const button = document.createElement('button');
     button.textContent = 'Table';
-    button.setAttribute('class', 'my-class');
     /**
      *Person
      * @param {*} firstName
@@ -285,13 +261,12 @@ class CalamarzoneConsole extends HTMLElement {
     shadow.appendChild(button);
   }
   /**
-   *  create Time example
+   *getTime
    * @param {shadowroot} shadow
    */
-  createTime(shadow) {
+  getTime(shadow) {
     const button = document.createElement('button');
     button.textContent = 'Time';
-    button.setAttribute('class', 'my-class');
     button.onclick = () => {
       console.time('mytime');
       let time = 1;
@@ -309,39 +284,36 @@ class CalamarzoneConsole extends HTMLElement {
     shadow.appendChild(button);
   }
   /**
-   *  create TimeLog example
+   *getTimeLog
    * @param {shadowroot} shadow
    */
-  createTimeLog(shadow) {
+  getTimeLog(shadow) {
     const button = document.createElement('button');
     button.textContent = 'TimeLog';
-    button.setAttribute('class', 'my-class');
     button.onclick = () => {
       console.timeLog('mytime');
     };
     shadow.appendChild(button);
   }
   /**
-   *  create TimeStamp example
+   *getTimeStamp
    * @param {shadowroot} shadow
    */
-  createTimeStamp(shadow) {
+  getTimeStamp(shadow) {
     const button = document.createElement('button');
     button.textContent = 'TimeStamp';
-    button.setAttribute('class', 'my-class');
     button.onclick = () => {
       console.timeStamp('Jimmy');
     };
     shadow.appendChild(button);
   }
   /**
-   *  create Trace example
+   *getTrace
    * @param {shadowroot} shadow
    */
-  createTrace(shadow) {
+  getTrace(shadow) {
     const button = document.createElement('button');
     button.textContent = 'Trace';
-    button.setAttribute('class', 'my-class');
     button.onclick = () => {
       /**
        *function1
@@ -360,13 +332,12 @@ class CalamarzoneConsole extends HTMLElement {
     shadow.appendChild(button);
   }
   /**
-   *  create Warn example
+   *getWarn
    * @param {shadowroot} shadow
    */
-  createWarn(shadow) {
+  getWarn(shadow) {
     const button = document.createElement('button');
     button.textContent = 'Warn';
-    button.setAttribute('class', 'my-class');
     button.onclick = () => {
       console.warn('This is an warning message');
     };
@@ -374,4 +345,5 @@ class CalamarzoneConsole extends HTMLElement {
   }
 }
 
-customElements.define('cz-console', CalamarzoneConsole);
+// Define the new element
+customElements.define('console-component', ConsoleComponent);
