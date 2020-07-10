@@ -1,376 +1,274 @@
 import css from './style.css';
+import template from './template.html';
 
-/**
- * CalamarzoneConsole class
- */
+
 class CalamarzoneConsole extends HTMLElement {
   /**
    * Constructor
    */
   constructor() {
     super();
-    const shadowRoot = this.attachShadow({mode: 'open'}),
-          style = document.createElement('style');
+    this.shadowNode = this.attachShadow({mode: 'open'});
+    this.appendStyle(this.shadowNode);
+    this.appendTemplate(this.shadowNode);
+  }
+
+  /**
+   * Append style to the shadow root
+   *
+   * @param {Object} shadowNode
+   */
+  appendStyle(shadowNode) {
+    const style = document.createElement('style');
     style.innerText = css;
-    shadowRoot.appendChild(style);
-    // console.log(style);
-    this.createAssert(shadowRoot);
-    this.createClear(shadowRoot);
-    this.createCount(shadowRoot);
-    this.createCountreset(shadowRoot);
-    this.createDebug(shadowRoot);
-    this.createDir(shadowRoot);
-    this.createDirXML(shadowRoot);
-    this.createError(shadowRoot);
-    this.createGroup(shadowRoot);
-    this.createGroupCollapsed(shadowRoot);
-    this.createInfo(shadowRoot);
-    this.createLog(shadowRoot);
-    this.createProfile(shadowRoot);
-    this.createTable(shadowRoot);
-    this.createTime(shadowRoot);
-    this.createTimeLog(shadowRoot);
-    this.createTimeStamp(shadowRoot);
-    this.createTrace(shadowRoot);
-    this.createWarn(shadowRoot);
-    // this.createClear(shadow);
-    // this.createCount(shadow);
+    shadowNode.appendChild(style);
   }
 
   /**
-   * Create Assert example
+   * Append html template to the shadow root
+   *
+   * @param {Object} shadowNode
+   */
+  appendTemplate(shadowNode) {
+    const templateElement = document.createElement('template');
+    templateElement.innerHTML = template;
+    shadowNode.appendChild(templateElement.content.cloneNode(true));
+  }
+
+  /**
+   * Lifecycle method
+   */
+  connectedCallback() {
+    this.form = this.shadowNode.getElementById('console-form');
+    this.addListeners();
+  }
+
+  /**
+   * Add event listeners to buttons
+   */
+  addListeners() {
+    this.form.elements.assert.onclick = this.consoleAssert;
+    this.form.elements.count.onclick = this.consoleCount;
+    this.form.elements.countReset.onclick = this.consoleCountreset;
+    this.form.elements.debug.onclick = this.consoleDebug;
+    this.form.elements.dir.onclick = this.consoleDir;
+    this.form.elements.dirxml.onclick = this.consoleDirXML;
+    this.form.elements.errorLog.onclick = this.consoleError;
+    this.form.elements.group.onclick = this.consoleGroup;
+    this.form.elements.groupCollapsed.onclick = this.consoleGroupCollapsed;
+    this.form.elements.info.onclick = this.consoleInfo;
+    this.form.elements.log.onclick = this.consoleLog;
+    this.form.elements.profile.onclick = this.consoleProfile;
+    this.form.elements.table.onclick = this.consoleTable;
+    this.form.elements.time.onclick = this.consoleTime;
+    this.form.elements.timelog.onclick = this.consoleTimeLog;
+    this.form.elements.timeStamp.onclick = this.consoleTimeStamp;
+    this.form.elements.trace.onclick = this.consoleTrace;
+    this.form.elements.warn.onclick = this.consoleWarn;
+    this.form.elements.clear.onclick = this.consoleClear;
+  }
+
+  /**
+   * Assert example
    * @param {ShadowRoot} shadow
    */
-  createAssert(shadow) {
-    const button = document.createElement('button');
-    button.textContent = 'assert';
-    button.setAttribute('class', 'my-class');
-    button.onclick = () => {
-      const random = Math.random() * 10,
-            limit = 5;
-      console.assert(random > limit, {
-        errorMsg: `Number ${random} is not greater than ${limit}`
-      });
-    };
-
-    shadow.appendChild(button);
+  consoleAssert() {
+    const random = Math.random() * 10,
+          limit = 5;
+    console.assert(random > limit, {
+      errorMsg: `Number ${random} is not greater than ${limit}`
+    });
   }
 
   /**
-   * Create Clear example
-   * @param {ShadowRoot} shadow
+   * Console Clear example
    */
-  createClear(shadow) {
-    const button = document.createElement('button');
-    button.textContent = 'clear';
-    button.setAttribute('class', 'my-class');
-    button.onclick = () => {
-      console.clear();
-    };
-
-    shadow.appendChild(button);
+  consoleClear() {
+    console.clear();
   }
 
   /**
-   * Create Count example
-   * @param {ShadowRoot} shadow
+   * Console Count example
    */
-  createCount(shadow) {
-    const button = document.createElement('button');
-    button.textContent = 'count';
-    button.setAttribute('class', 'my-class');
-    button.onclick = () => {
-      console.count();
-    };
-
-    shadow.appendChild(button);
+  consoleCount() {
+    console.count();
   }
 
   /**
-   *  Create Countreset example
-   * @param {shadowroot} shadow
+   * Console Countreset example
    */
-  createCountreset(shadow) {
-    const button = document.createElement('button');
-    button.textContent = 'countReset';
-    button.setAttribute('class', 'my-class');
-    button.onclick = () => {
-      console.countReset();
-    };
-    shadow.appendChild(button);
+  consoleCountreset() {
+    console.countReset();
   }
 
   /**
-   * Create Debug example
-   * @param {shadowroot} shadow
+   * Console Debug example
    */
-  createDebug(shadow) {
-    const button = document.createElement('button');
-    button.textContent = 'Debug';
-    button.setAttribute('class', 'my-class');
-    button.onclick = () => {
-      console.debug('Debugging');
-    };
-    shadow.appendChild(button);
-  }
-  /**
-   * Create Dir example
-   * @param {shadowroot} shadow
-   */
-  createDir(shadow) {
-    const button = document.createElement('button');
-    button.textContent = 'Dir';
-    button.setAttribute('class', 'my-class');
-    button.onclick = () => {
-      console.dir(button);
-      console.log(typeof button);
-      console.log(button);
-    };
-    shadow.appendChild(button);
-  }
-  /**
-   * create DirXML example
-   * @param {shadowroot} shadow
-   */
-  createDirXML(shadow) {
-    const button = document.createElement('button');
-    button.textContent = 'DirXML';
-    button.setAttribute('class', 'my-class');
-    button.onclick = () => {
-      const fancyThings = {
-        car: '🏎️ Ferrari',
-        watch: '⌚ Cartier',
-        clothing: {
-          shoes: '👠 Christian Louboutin',
-          dress: '👗 Versace'
-        },
-        boat: '🛥️ Sunseeker'
-      };
-      console.dirxml(fancyThings);
-      console.dirxml(button);
-      console.log(typeof button);
-      console.log(button);
-    };
-    shadow.appendChild(button);
-  }
-  /**
-   *  Create Error example
-   * @param {shadowroot} shadow
-   */
-  createError(shadow) {
-    const button = document.createElement('button');
-    button.textContent = 'Error';
-    button.setAttribute('class', 'my-class');
-    button.onclick = () => {
-      console.error('This is an error message!');
-    };
-    shadow.appendChild(button);
-  }
-  /**
-   * create Group example
-   * @param {shadowroot} shadow
-   */
-  createGroup(shadow) {
-    const button = document.createElement('button');
-    button.textContent = 'Group';
-    button.setAttribute('class', 'my-class');
-    button.onclick = () => {
-      console.group('Level 2');
-      console.log('Level 2');
-      console.group('Level 3');
-      console.log('Level 3');
-      console.log('More of level 3');
-      console.groupEnd();
-      console.log('Back to level 2');
-      console.groupEnd();
-    };
-    shadow.appendChild(button);
-  }
-  /**
-   *create GroupCollapsed example
-   * @param {shadowroot} shadow
-   */
-  createGroupCollapsed(shadow) {
-    const button = document.createElement('button');
-    button.textContent = 'GroupCollapsed';
-    button.setAttribute('class', 'my-class');
-    button.onclick = () => {
-      console.groupCollapsed('Level 2');
-      console.log('Level 2');
-      console.log('You had to displayed it right?');
-      console.group('Level 3');
-      console.log('Level 3');
-      console.log('More of level 3');
-      console.log('You had to displayed it right?');
-      console.groupEnd();
-      console.log('Back to level 2');
-      console.groupEnd();
-    };
-    shadow.appendChild(button);
-  }
-  /**
-   *  create Info example
-   * @param {shadowroot} shadow
-   */
-  createInfo(shadow) {
-    const button = document.createElement('button');
-    button.textContent = 'Info';
-    button.setAttribute('class', 'my-class');
-    button.onclick = () => {
-      console.info('This is an info message');
-    };
-    shadow.appendChild(button);
-  }
-  /**
-   *  create Log example
-   * @param {shadowroot} shadow
-   */
-  createLog(shadow) {
-    const button = document.createElement('button');
-    button.textContent = 'Log';
-    button.setAttribute('class', 'my-class');
-    button.onclick = () => {
-      console.log(document.body);
-    };
-    shadow.appendChild(button);
-  }
-  /**
-   *  create Profile example
-   * @param {shadowroot} shadow
-   */
-  createProfile(shadow) {
-    const button = document.createElement('button');
-    button.textContent = 'Profile';
-    button.setAttribute('class', 'my-class');
-    button.onclick = () => {
-      console.profile('myProfile');
-      let time = 1;
-      const interval = setInterval(function() {
-        if (time <= 3) {
-          alert(time);
-          time++;
-        } else {
-          clearInterval(interval);
-          console.profileEnd();
-          alert('Go to the JavaScript Profiler to see the results');
-        }
-      }, 4000);
-    };
-    shadow.appendChild(button);
+  consoleDebug() {
+    console.debug('Debugging');
   }
 
   /**
-   *  create Table example
-   * @param {shadowroot} shadow
+   * Console Dir example
    */
-  createTable(shadow) {
-    const button = document.createElement('button');
-    button.textContent = 'Table';
-    button.setAttribute('class', 'my-class');
-    /**
-     *Person
-     * @param {*} firstName
-     * @param {*} lastName
-     */
+  consoleDir() {
+    console.dir(this);
+    console.log(typeof this);
+    console.log(this);
+  }
+
+  /**
+   * Console DirXML example
+   */
+  consoleDirXML() {
+    const fancyThings = {
+      car: '🏎️ Ferrari',
+      watch: '⌚ Cartier',
+      clothing: {
+        shoes: '👠 Christian Louboutin',
+        dress: '👗 Versace'
+      },
+      boat: '🛥️ Sunseeker'
+    };
+    console.dirxml(fancyThings);
+    console.dirxml(this);
+    console.log(typeof this);
+    console.log(this);
+  }
+
+  /**
+   * Console Error example
+   */
+  consoleError() {
+    console.error('This is an error message!');
+  }
+
+  /**
+   * Console Group example
+   */
+  consoleGroup() {
+    console.group('Level 2');
+    console.log('Level 2');
+    console.group('Level 3');
+    console.log('Level 3');
+    console.log('More of level 3');
+    console.groupEnd();
+    console.log('Back to level 2');
+    console.groupEnd();
+  }
+
+  /**
+   * Console GroupCollapsed example
+   */
+  consoleGroupCollapsed() {
+    console.groupCollapsed('Level 2');
+    console.log('Level 2');
+    console.log('You had to displayed it right?');
+    console.group('Level 3');
+    console.log('Level 3');
+    console.log('More of level 3');
+    console.log('You had to displayed it right?');
+    console.groupEnd();
+    console.log('Back to level 2');
+    console.groupEnd();
+  }
+
+  /**
+   * Console Info example
+   */
+  consoleInfo() {
+    console.info('This is an info message');
+  }
+
+  /**
+   * Console Log example
+   */
+  consoleLog() {
+    console.log(document.body);
+  }
+
+  /**
+   * Console Profile example
+   */
+  consoleProfile() {
+    console.profile('myProfile');
+    let time = 1;
+    const interval = setInterval(function() {
+      if (time <= 3) {
+        alert(time);
+        time++;
+      } else {
+        clearInterval(interval);
+        console.profileEnd();
+        alert('Go to the JavaScript Profiler to see the results');
+      }
+    }, 4000);
+  }
+
+  /**
+   * Console Table example
+   */
+  consoleTable() {
     function Person(firstName, lastName) {
       this.firstName = firstName;
       this.lastName = lastName;
     }
-    button.onclick = () => {
-      const devs = {};
-      devs.dev1 = new Person('Irving', 'Medina');
-      devs.dev2 = new Person('Rodrigo', 'Benavides');
-      console.table(devs);
-    };
-    shadow.appendChild(button);
+    const devs = {};
+    devs.dev1 = new Person('Irving', 'Medina');
+    devs.dev2 = new Person('Rodrigo', 'Benavides');
+    console.table(devs);
   }
+
   /**
-   *  create Time example
-   * @param {shadowroot} shadow
+   * Console Time example
    */
-  createTime(shadow) {
-    const button = document.createElement('button');
-    button.textContent = 'Time';
-    button.setAttribute('class', 'my-class');
-    button.onclick = () => {
-      console.time('mytime');
-      let time = 1;
-      const interval = setInterval(function() {
-        if (time <= 5) {
-          console.log(time);
-          time++;
-        } else {
-          clearInterval(interval);
-          console.timeEnd('mytime');
-          console.log('Time is 5');
-        }
-      }, 4000);
-    };
-    shadow.appendChild(button);
-  }
-  /**
-   *  create TimeLog example
-   * @param {shadowroot} shadow
-   */
-  createTimeLog(shadow) {
-    const button = document.createElement('button');
-    button.textContent = 'TimeLog';
-    button.setAttribute('class', 'my-class');
-    button.onclick = () => {
-      console.timeLog('mytime');
-    };
-    shadow.appendChild(button);
-  }
-  /**
-   *  create TimeStamp example
-   * @param {shadowroot} shadow
-   */
-  createTimeStamp(shadow) {
-    const button = document.createElement('button');
-    button.textContent = 'TimeStamp';
-    button.setAttribute('class', 'my-class');
-    button.onclick = () => {
-      console.timeStamp('Jimmy');
-    };
-    shadow.appendChild(button);
-  }
-  /**
-   *  create Trace example
-   * @param {shadowroot} shadow
-   */
-  createTrace(shadow) {
-    const button = document.createElement('button');
-    button.textContent = 'Trace';
-    button.setAttribute('class', 'my-class');
-    button.onclick = () => {
-      /**
-       *function1
-       */
-      function function1() {
-        /**
-         *function2
-         */
-        function function2() {
-          console.trace();
-        }
-        function2();
+  consoleTime() {
+    console.time('mytime');
+    let time = 1;
+    const interval = setInterval(function() {
+      if (time <= 5) {
+        console.log(time);
+        time++;
+      } else {
+        clearInterval(interval);
+        console.timeEnd('mytime');
+        console.log('Time is 5');
       }
-      function1();
-    };
-    shadow.appendChild(button);
+    }, 4000);
   }
+
   /**
-   *  create Warn example
-   * @param {shadowroot} shadow
+   * Console TimeLog example
    */
-  createWarn(shadow) {
-    const button = document.createElement('button');
-    button.textContent = 'Warn';
-    button.setAttribute('class', 'my-class');
-    button.onclick = () => {
-      console.warn('This is an warning message');
-    };
-    shadow.appendChild(button);
+  consoleTimeLog() {
+    console.timeLog('mytime');
+  }
+
+  /**
+   * Console TimeStamp example
+   */
+  consoleTimeStamp() {
+    console.timeStamp('Jimmy');
+  }
+
+  /**
+   * Console Trace example
+   */
+  consoleTrace() {
+    function function1() {
+      function function2() {
+        console.trace();
+      }
+      function2();
+    }
+    function1();
+  }
+
+  /**
+   * Console Warn example
+   */
+  consoleWarn() {
+    console.warn('This is an warning message');
   }
 }
 
