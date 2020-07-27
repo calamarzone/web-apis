@@ -50,6 +50,7 @@ class CalamarzoneHistory extends HTMLElement {
     this.form.elements.forward.onclick = this.historyForward;
     this.form.elements.go.onclick = this.historyGo;
     this.form.elements.reload.onclick = this.historyReload;
+    this.form.elements.replaceState.onclick = this.historyReplaceState;
   }
   /**
    * History Back example
@@ -77,6 +78,18 @@ class CalamarzoneHistory extends HTMLElement {
    */
   historyReload() {
     window.history.go();
+  }
+
+  /**
+   * History ReplaceState example
+   */
+  historyReplaceState() {
+    window.onpopstate = function(event) {
+      console.log('location: ' + document.location +
+      ', state: ' + JSON.stringify(event.state));
+    };
+    history.pushState({page: 1}, 'title 2', '/demo2.html');
+    history.replaceState({page: 1}, 'title 2', '/demo2.html');
   }
 }
 
