@@ -33,18 +33,22 @@ class CalamarzoneURL extends HTMLElement {
    */
   addListeners() {
     // touchstart event
-    this.mainElement.addEventListener('touchstart', () => {
-      this.statusElement.textContent = 'Touch start event';
+    this.mainElement.addEventListener('touchstart', (event) => {
+      this.statusElement.textContent = 'touch start event with an amount of ' +
+        event.touches.length + ' active touch ' +
+        (event.touches.length === 1 ? 'point' : 'points');
     }, false);
 
     // touchmove event
-    this.mainElement.addEventListener('touchmove', () => {
-      this.statusElement.textContent = 'Touch move event';
+    this.mainElement.addEventListener('touchmove', (event) => {
+      this.statusElement.textContent = 'touch move event with an amount of ' +
+        event.touches.length + ' active touch ' +
+        (event.touches.length === 1 ? 'point' : 'points');
     }, false);
 
     // touchend event
     this.mainElement.addEventListener('touchend', () => {
-      this.statusElement.textContent = 'Touch end event';
+      this.statusElement.textContent = 'touch end event';
 
       // reset status text
       setTimeout(() => {
