@@ -16,7 +16,6 @@ class CalamarzoneWebStorage extends HTMLElement {
    * Lifecycle method
    */
   connectedCallback() {
-    this.form = this.shadowRoot.getElementById('storage-form');
     this.getElements();
     this.addListeners();
   }
@@ -25,8 +24,11 @@ class CalamarzoneWebStorage extends HTMLElement {
    * Get elements method
    */
   getElements() {
-    this.data = this.shadowRoot.getElementById('data');
+    this.form = this.shadowRoot.getElementById('storage-form');
+    this.local = this.shadowRoot.getElementById('local-data');
+    this.session = this.shadowRoot.getElementById('session-data');
   }
+
   /**
    * Add event listeners to input, button, and textarea in the URL form
    */
@@ -34,19 +36,26 @@ class CalamarzoneWebStorage extends HTMLElement {
     this.form.elements.save.addEventListener('click', () => {
       localStorage.name = this.form.elements.name.value;
       localStorage.password = this.form.elements.password.value;
+      sessionStorage.name = this.form.elements.name.value;
+      sessionStorage.password = this.form.elements.password.value;
     });
 
     this.form.elements.display.addEventListener('click', () => {
       if ((localStorage.name != undefined) &&
        (localStorage.password != undefined)) {
-        this.data.textContent = 'Nombre: ' +
-        localStorage.name + ' Password: ' + localStorage.password;
+        this.local.textContent = 'Nombre: ' +
+          localStorage.name + ' Password: ' + localStorage.password;
+        this.session.textContent = 'Nombre: ' +
+          sessionStorage.name + ' Password: ' + sessionStorage.password;
       } else {
-        this.data.textContent =
-        'No has introducido tu nombre y tu password';
+        this.local.textContent =
+          'No has introducido tu nombre y tu password';
+        this.session.textContent =
+          'No has introducido tu nombre y tu password';
       }
     });
   }
+
   /**
    * Append style to the shadow root
    *
