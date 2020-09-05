@@ -1,0 +1,29 @@
+.storage-form {
+  width: calc(50% - 30px);
+  margin: 0 auto;
+}
+
+.storage-form__field {
+  display: flex;
+  flex-direction: column;
+  margin: 12px 0;
+}
+
+.storage-form__field__label {
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.storage-form__field__label,
+.storage-form__field__textarea,
+.storage-form__field__input {
+  flex: 1;
+}
+
+.storage-form__field__textarea {
+  resize: none;
+}
+
+.storage-form__reset {
+  float: right;
+}

@@ -1,0 +1,11 @@
+header {
+  color: white;
+  background: #2B3243;
+  padding: 5px 20px;
+}
+
+main {
+  height: 75vh;
+  margin: 1rem 0;
+  background: #2B3243;
+}
