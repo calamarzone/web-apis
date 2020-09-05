@@ -16,7 +16,6 @@ class CalamarzoneWebStorage extends HTMLElement {
    * Lifecycle method
    */
   connectedCallback() {
-    this.form = this.shadowRoot.getElementById('storage-form');
     this.getElements();
     this.addListeners();
   }
@@ -25,6 +24,7 @@ class CalamarzoneWebStorage extends HTMLElement {
    * Get elements method
    */
   getElements() {
+    this.form = this.shadowRoot.getElementById('storage-form');
     this.data = this.shadowRoot.getElementById('data');
   }
   /**
@@ -32,19 +32,27 @@ class CalamarzoneWebStorage extends HTMLElement {
    */
   addListeners() {
     this.form.elements.save.addEventListener('click', () => {
+      localStorage.setItem('name1', this.form.elements.name.value);
       localStorage.name = this.form.elements.name.value;
-      localStorage.password = this.form.elements.password.value;
+      localStorage.setItem('password', this.form.elements.password.value);
     });
 
     this.form.elements.display.addEventListener('click', () => {
-      if ((localStorage.name != undefined) &&
-       (localStorage.password != undefined)) {
+      const name = localStorage.getItem('name'),
+            password = localStorage.getItem('password');
+      if (name !== null &&
+        password !== null) {
         this.data.textContent = 'Nombre: ' +
-        localStorage.name + ' Password: ' + localStorage.password;
+        name + ' Password: ' +
+         password;
       } else {
         this.data.textContent =
-        'No has introducido tu nombre y tu password';
+        'You have not submit any data';
       }
+    });
+
+    this.form.elements.clear.addEventListener('click', () => {
+      localStorage.clear();
     });
   }
   /**
